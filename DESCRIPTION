@@ -1,0 +1,23 @@
+Package: quartowp
+Title: Publish Quarto Articles to WordPress
+Version: 0.0.0.9000
+Authors@R:
+    person(
+      given = "Peter",
+      family = "Baumgartner",
+      email = "petzi53@gmail.com",
+      role = c("aut", "cre")
+    )
+Description: Render Quarto articles and publish their text, tables, and
+    figures to WordPress through the WordPress REST API. The package uploads
+    locally generated media, rewrites media references, and creates or
+    updates WordPress posts.
+License: MIT + file LICENSE
+URL: https://github.com/petzi53/quartowp
+BugReports: https://github.com/petzi53/quartowp/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
