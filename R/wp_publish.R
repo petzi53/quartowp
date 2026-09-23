@@ -52,9 +52,13 @@ wp_publish <- function(input = NULL, status = "draft") {
         choices = c("draft", "publish")
     )
 
+    # Render the Quarto document.
+    rendered <- quarto_render(input)
+
     # Create the result object.
     result <- list(
         input = normalizePath(input),
+        rendered = rendered,
         status = status
     )
 

@@ -1,18 +1,23 @@
-quarto_render <- function(file) {
-    quarto::quarto_render(
-        input = file,
-        output_format = "html",
-        quiet = TRUE
+test_that("quarto_render renders a qmd file to HTML", {
+
+    qmd <- tempfile(fileext = ".qmd")
+
+    writeLines(
+        c(
+            "---",
+            "title: \"Test document\"",
+            "---",
+            "",
+            "# Hello",
+            "",
+            "This is a test."
+        ),
+        qmd
     )
 
-    output <- sub("\\.qmd$", ".html", file, ignore.case = TRUE)
+    html <- quarto_render(qmd)
 
-    if (!file.exists(output)) {
-        stop(
-            "Quarto rendering did not produce an HTML file.",
-            call. = FALSE
-        )
-    }
+    expect_true(file.exists(html))
+    expect_match(html, "\\.html$")
 
-    normalizePath(output, mustWork = TRUE)
-}
+})

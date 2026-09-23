@@ -19,7 +19,7 @@ test_that("wp_publish rejects non-Quarto files", {
 
 })
 
-test_that("wp_publish creates a quartowp_post object", {
+test_that("wp_publish renders a Quarto document and creates a quartowp_post object", {
 
     file <- tempfile(fileext = ".qmd")
     writeLines("# Test post", file)
@@ -28,6 +28,8 @@ test_that("wp_publish creates a quartowp_post object", {
 
     expect_s3_class(result, "quartowp_post")
     expect_equal(result$input, normalizePath(file))
+    expect_true(file.exists(result$rendered))
+    expect_match(result$rendered, "\\.html$")
     expect_equal(result$status, "draft")
 
 })
