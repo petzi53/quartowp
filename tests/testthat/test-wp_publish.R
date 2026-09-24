@@ -30,6 +30,7 @@ test_that("wp_publish renders a Quarto document and creates a quartowp_post obje
     expect_equal(result$input, normalizePath(file))
     expect_true(file.exists(result$rendered))
     expect_match(result$rendered, "\\.html$")
+    expect_match(result$content, "Test post")
     expect_equal(result$status, "draft")
 
 })

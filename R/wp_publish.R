@@ -55,10 +55,14 @@ wp_publish <- function(input = NULL, status = "draft") {
     # Render the Quarto document.
     rendered <- quarto_render(input)
 
+    # Extract the HTML content for the WordPress post body.
+    content <- html_content(rendered)
+
     # Create the result object.
     result <- list(
         input = normalizePath(input),
         rendered = rendered,
+        content = content,
         status = status
     )
 
