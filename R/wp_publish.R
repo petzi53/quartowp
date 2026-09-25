@@ -55,6 +55,9 @@ wp_publish <- function(input = NULL, status = "draft") {
     # Render the Quarto document.
     rendered <- quarto_render(input)
 
+    # Extract title from the rendered Quarto document
+    title <- html_title(rendered)
+
     # Extract the HTML content for the WordPress post body.
     content <- html_content(rendered)
 
@@ -62,6 +65,7 @@ wp_publish <- function(input = NULL, status = "draft") {
     result <- list(
         input = normalizePath(input),
         rendered = rendered,
+        title = title,
         content = content,
         status = status
     )

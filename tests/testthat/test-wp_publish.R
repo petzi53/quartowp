@@ -22,7 +22,14 @@ test_that("wp_publish rejects non-Quarto files", {
 test_that("wp_publish renders a Quarto document and creates a quartowp_post object", {
 
     file <- tempfile(fileext = ".qmd")
-    writeLines("# Test post", file)
+    writeLines(
+        c(
+            "---",
+            'title: "My Test Article"',
+            "---",
+            "# Test post"
+            ),
+        file)
 
     result <- wp_publish(file)
 
@@ -30,6 +37,7 @@ test_that("wp_publish renders a Quarto document and creates a quartowp_post obje
     expect_equal(result$input, normalizePath(file))
     expect_true(file.exists(result$rendered))
     expect_match(result$rendered, "\\.html$")
+    expect_equal(result$title, "My Test Article")
     expect_match(result$content, "Test post")
     expect_equal(result$status, "draft")
 
@@ -38,7 +46,14 @@ test_that("wp_publish renders a Quarto document and creates a quartowp_post obje
 test_that("wp_publish validates post status", {
 
     file <- tempfile(fileext = ".qmd")
-    writeLines("# Test post", file)
+    writeLines(
+        c(
+            "---",
+            'title: "My Test Article"',
+            "---",
+            "# Test post"
+        ),
+        file)
 
     result <- wp_publish(file, status = "publish")
 
