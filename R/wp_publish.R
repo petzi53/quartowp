@@ -62,16 +62,7 @@ wp_publish <- function(input = NULL, status = "draft") {
     content <- html_content(rendered)
 
     # Create the result object.
-    result <- list(
-        input = normalizePath(input),
-        rendered = rendered,
-        title = title,
-        content = content,
-        status = status
-    )
+    payload <- wp_post_data(title, content, status)
 
-    # Turn the ordinary list into an S3 object.
-    class(result) <- "quartowp_post"
-
-    result
+    payload
 }
