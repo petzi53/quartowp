@@ -24,5 +24,6 @@ Suggests:
     withr
 Config/testthat/edition: 3
 Imports:
+    httr2,
     quarto,
     xml2
